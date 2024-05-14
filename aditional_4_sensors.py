@@ -57,6 +57,7 @@ def sensor_calibration():
 
 def forward():
     robot.drive(DRIVE_SPEED, 0)
+    sensor_calibration()
 
 
 def PID(deviation):
@@ -93,7 +94,8 @@ while True:
     # Calculate the deviation from the threshold.
     deviation = (((s1_rf - A)-(s4_rf - B))+((s2_rf - C)-(s3_rf - D)))
 
-    if((S1_rf and S2_rf and S3_rf and S4_rf ) > 50 ):
+    if((S1_rf and S2_rf and S3_rf and S4_rf ) > 50 ): # Here 50 is the value of the light intensity value reflecting from the white surface , also it should not be the exact value 
+    #, for example if the intensity is 70 on white and 5 on black and , make this treshold greater than 50 is the best .
         forward()
     else:
         PID(deviation)
